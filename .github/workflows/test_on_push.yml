@@ -17,6 +17,8 @@ jobs:
           AQUA_PASSWORD: ${{ secrets.AQUA_PASSWORD }}
       - name: set transition to ${{ matrix.transition }}
         uses: ./
+        env:
+          NODE_DEBUG: http, net, stream
         with:
           aqua-token: ${{ steps.login.outputs.token }}
           defect: DF001268
