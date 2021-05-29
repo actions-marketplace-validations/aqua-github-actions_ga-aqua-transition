@@ -13,7 +13,7 @@ module.exports = class {
 
   async execute() {
     await this.Aqua.updateTransition({
-      defect: this.defect,
+      defect: this.defect.substring(2),
       transition: this.transition,
     });
   }
