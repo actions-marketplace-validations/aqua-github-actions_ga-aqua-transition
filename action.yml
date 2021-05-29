@@ -1,0 +1,22 @@
+name: 'Aqua Defect Transition'
+description: 'Change status of specific aqua defect.'
+branding:
+  icon: 'bookmark'
+  color: 'blue'
+inputs:
+  aqua-base-url:
+    description: 'Base url for aqua rest api'
+    required: true
+    default: 'https://aqua-saas2.andagon.com/aquaWebNG/api'
+  aqua-token:
+    description: 'Bearer token to use for log out from aqua'
+    required: true
+  defect:
+    description: 'Key of the defect to be transitioned'
+    required: true
+  transition:
+    description: The transition to apply to the defect, e.g. 'Done'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
