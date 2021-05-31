@@ -2,11 +2,8 @@ on: push
 name: Test on push
 jobs:
   transition:
-    name: Set transition to ${{ matrix.transition }} for defect DF001268
+    name: update transition for defect DF001268
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        transition: [ "new", "solved", "in processing", "reopened", "closed", "paused"]
     steps:
       - uses: actions/checkout@v2
       - name: login to aqua saas instance
@@ -15,14 +12,54 @@ jobs:
         env:
           AQUA_USERNAME: ${{ secrets.AQUA_USERNAME }}
           AQUA_PASSWORD: ${{ secrets.AQUA_PASSWORD }}
-      - name: set transition to ${{ matrix.transition }}
+      - name: set transition to 'new'
         uses: ./
         env:
           NODE_DEBUG: http, net, stream
         with:
           aqua-token: ${{ steps.login.outputs.token }}
           defect: DF001268
-          transition: ${{ matrix.transition }}
+          transition: new
+      - name: to 'solved'
+          uses: ./
+          env:
+            NODE_DEBUG: http, net, stream
+          with:
+            aqua-token: ${{ steps.login.outputs.token }}
+            defect: DF001268
+            transition: solved
+      - name: to 'in processing'
+          uses: ./
+          env:
+            NODE_DEBUG: http, net, stream
+          with:
+            aqua-token: ${{ steps.login.outputs.token }}
+            defect: DF001268
+            transition: in processing
+      - name: to 'reopened'
+          uses: ./
+          env:
+            NODE_DEBUG: http, net, stream
+          with:
+            aqua-token: ${{ steps.login.outputs.token }}
+            defect: DF001268
+            transition: reopened
+      - name: to 'closed'
+          uses: ./
+          env:
+            NODE_DEBUG: http, net, stream
+          with:
+            aqua-token: ${{ steps.login.outputs.token }}
+            defect: DF001268
+            transition: closed
+      - name: to 'paused'
+          uses: ./
+          env:
+            NODE_DEBUG: http, net, stream
+          with:
+            aqua-token: ${{ steps.login.outputs.token }}
+            defect: DF001268
+            transition: paused
       - name: logout to aqua saas instance
         uses: uniqueck/ga-aqua-logout@v1.0.0
         with:
