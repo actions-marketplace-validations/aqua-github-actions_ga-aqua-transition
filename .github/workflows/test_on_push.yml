@@ -21,45 +21,45 @@ jobs:
           defect: DF001268
           transition: new
       - name: to 'solved'
-          uses: ./
-          env:
-            NODE_DEBUG: http, net, stream
-          with:
-            aqua-token: ${{ steps.login.outputs.token }}
-            defect: DF001268
-            transition: solved
+        uses: ./
+        env:
+          NODE_DEBUG: http, net, stream
+        with:
+          aqua-token: ${{ steps.login.outputs.token }}
+          defect: DF001268
+          transition: solved
       - name: to 'in processing'
-          uses: ./
-          env:
-            NODE_DEBUG: http, net, stream
-          with:
-            aqua-token: ${{ steps.login.outputs.token }}
-            defect: DF001268
-            transition: in processing
+        uses: ./
+        env:
+          NODE_DEBUG: http, net, stream
+        with:
+          aqua-token: ${{ steps.login.outputs.token }}
+          defect: DF001268
+          transition: in processing
       - name: to 'reopened'
-          uses: ./
-          env:
-            NODE_DEBUG: http, net, stream
-          with:
-            aqua-token: ${{ steps.login.outputs.token }}
-            defect: DF001268
-            transition: reopened
+        uses: ./
+        env:
+          NODE_DEBUG: http, net, stream
+        with:
+          aqua-token: ${{ steps.login.outputs.token }}
+          defect: DF001268
+          transition: reopened
       - name: to 'closed'
-          uses: ./
-          env:
-            NODE_DEBUG: http, net, stream
-          with:
-            aqua-token: ${{ steps.login.outputs.token }}
-            defect: DF001268
-            transition: closed
+        uses: ./
+        env:
+          NODE_DEBUG: http, net, stream
+        with:
+          aqua-token: ${{ steps.login.outputs.token }}
+          defect: DF001268
+          transition: closed
       - name: to 'paused'
-          uses: ./
-          env:
-            NODE_DEBUG: http, net, stream
-          with:
-            aqua-token: ${{ steps.login.outputs.token }}
-            defect: DF001268
-            transition: paused
+        uses: ./
+        env:
+          NODE_DEBUG: http, net, stream
+        with:
+          aqua-token: ${{ steps.login.outputs.token }}
+          defect: DF001268
+          transition: paused
       - name: logout to aqua saas instance
         uses: uniqueck/ga-aqua-logout@v1.0.0
         with:
