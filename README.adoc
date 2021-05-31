@@ -1,11 +1,15 @@
-= https://aqua-cloud.io[Aqua] Logout
+:ga-aqua-login-version: v1.0.1
+:ga-aqua-logout-version: v1.0.0
+:ga-aqua-transition-version: v1.0.0
 
-Used to logout from aqua cloud instance.
+= https://aqua-cloud.io[Aqua] Update Transition
+
+Used to update a transition for a defect on aqua cloud instance.
 
 == Usage
-An example workflow to logout from a aqua cloud instance:
+An example workflow to update a transition:
 
-[source, yaml]
+[source, yaml, subs=attributes]
 ----
 on: push
 
@@ -18,19 +22,20 @@ jobs:
     steps:
     - name: Login
       id: login
-      uses: uniqueck/ga-aqua-login@master
-      env:
-        AQUA_BASE_URL: ${{ secrets.AQUA_BASE_URL }}
-        AQUA_USERNAME: ${{ secrets.AQUA_USERNAME }}
-        AQUA_PASSWORD: ${{ secrets.AQUA_PASSWORD }}
-      with: # or as parameters
+      uses: uniqueck/ga-aqua-login@{ga-aqua-login-version}
+      with:
         aqua-base-url: ${{ secrets.AQUA_BASE_URL }}
         aqua-username: ${{ secrets.AQUA_USERNAME }}
         aqua-password: ${{ secrets.AQUA_PASSWORD }}
-    - name: Generated bearer tokens
-      run: echo "Token ${{ steps.login.outputs.token }}"
+    - name: Update transition to new
+      uses: uniqueck/ga-aqua-transition@{ga-aqua-transition-version}
+      with:
+        aqua-base-url: ${{ secrets.AQUA_BASE_URL }}
+        aqua-token: ${{ steps.login.outputs.token }}
+        defect: DF001268
+        transition: new
     - name: Logout
-      uses: uniqueck/ga-aqua-logout@master
+      uses: uniqueck/ga-aqua-logout@{ga-aqua-logout-version}
       with:
         aqua-base-url: ${{ secrets.AQUA_BASE_URL }}
         aqua-token: ${{ steps.login.outputs.token }}
@@ -44,3 +49,5 @@ jobs:
 === Arguments
 - `aqua-base-url` - URL of aqua instance. Example `https://aqua-saas2.andagon.com/aquaWebNG`
 - `aqua-token` - Bearer token to logout from aqua.
+- `defect` - Id of defect to update
+- `transition` - Name of transition to update to e.g. (new, solved, reopened, paused, closed, in processing)
