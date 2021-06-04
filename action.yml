@@ -1,7 +1,7 @@
 name: 'Aqua Defect Transition'
 description: 'Change status of specific aqua defect.'
 branding:
-  icon: 'bookmark'
+  icon: 'droplet'
   color: 'blue'
 inputs:
   aqua-base-url:
